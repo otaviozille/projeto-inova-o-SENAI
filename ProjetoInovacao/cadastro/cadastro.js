@@ -175,6 +175,19 @@ document.addEventListener('DOMContentLoaded', () => {
     setTimeout(() => alert.remove(), 5000)
   }
 
+
+
+
+
+
+
+
+
+
+
+
+
+  
   function showErrorMessage(message) {
     const alert = document.createElement('div')
     alert.className = 'alert error'
