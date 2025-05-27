@@ -1,0 +1,19 @@
+{
+    "name": "joao/projeto-inovacao",
+    "description": "projeto inovação SENAI",
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "Joao\\ProjetoInovacao\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "NexGen Innovations"
+        }
+    ],
+    "minimum-stability": "stable",
+    "require": {
+        "vlucas/phpdotenv": "^5.6"
+    }
+}
