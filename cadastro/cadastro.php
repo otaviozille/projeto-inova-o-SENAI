@@ -19,7 +19,7 @@
         <h1 class="brand-title">Cadastro Petrobras</h1>
       </div>
 
-      <form id="cadastroForm" class="auth-form" method="post" action="cadastrar.php" novalidate>
+      <form id="cadastroForm" class="auth-form" method="post" action="../MySql/cadastro.php" novalidate>
         <div class="form-group">
           <label for="nome">Nome completo</label>
           <input type="text" id="nome" name="nome" required placeholder="Ex: João da Silva" />
@@ -57,16 +57,16 @@
         <div class="form-group">
           <label for="comunidade">Comunidade</label>
           <select id="comunidade" name="comunidade" required>
-            <option value="">Selecione sua comunidade</option>
+             <option value="">Selecione sua comunidade</option>
             <?php
-              include '../conexao.php';
+              /* include '../config/php/conn.php';
               $sql = "SELECT id, nome FROM comunidades";
-              // $result = $conn->query($sql);
+               $result = $conn->query($sql);
               if ($result && $result->num_rows > 0) {
                   while ($row = $result->fetch_assoc()) {
                       echo "<option value='" . $row['id'] . "'>" . htmlspecialchars($row['nome']) . "</option>";
                   }
-              }
+              } */
             ?>
             <option value="outra">Outra (não encontrada)</option>
           </select>

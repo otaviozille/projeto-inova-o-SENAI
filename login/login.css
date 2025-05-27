@@ -16,8 +16,8 @@
 
 body {
   font-family: 'Roboto', sans-serif;
-  background-image: url('fundo-login-claro.jpg');
-  background-size: cover;
+  background-image: url('../imgs/fundo-login-claro.jpg');
+  background-size: cover; 
   background-position: center;
   background-repeat: no-repeat;
   background-attachment: fixed;
@@ -27,12 +27,11 @@ body {
 }
 
 body.dark {
-  background-image: url('fundo-login-escuro.jpg');
+  background-image: url('../imgs/fundo-login-escuro.jpg');
   color: var(--text-dark);
 }
 
 body::before {
-  content: "";
   position: fixed;
   inset: 0;
   background: rgba(0, 0, 0, 0.3);
@@ -169,7 +168,6 @@ body.dark .theme-btn {
 /* Dark mode adjustments */
 body.dark .login-box h2,
 body.dark label,
-body.dark .register-link,
 body.dark .text-link {
   color: white;
 }
