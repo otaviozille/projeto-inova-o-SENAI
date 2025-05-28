@@ -18,6 +18,11 @@
       <div class="brand-header">
         <h1 class="brand-title">Cadastro Petrobras</h1>
       </div>
+      <?php
+      if (isset($_GET['error']) && $_GET['error'] === 'erro_cadastro') {
+          echo '<p class="error" style="color:red; font-weight:bold; margin-bottom: 1rem;">Erro no cadastro, tente novamente!</p>';
+      }
+      ?>
 
       <form id="cadastroForm" class="auth-form" method="post" action="../MySql/cadastro.php" novalidate>
         <div class="form-group">
@@ -59,14 +64,14 @@
           <select id="comunidade" name="comunidade" required>
              <option value="">Selecione sua comunidade</option>
             <?php
-              /* include '../config/php/conn.php';
-              $sql = "SELECT id, nome FROM comunidades";
-               $result = $conn->query($sql);
-              if ($result && $result->num_rows > 0) {
-                  while ($row = $result->fetch_assoc()) {
-                      echo "<option value='" . $row['id'] . "'>" . htmlspecialchars($row['nome']) . "</option>";
-                  }
-              } */
+              include_once __DIR__ . '/../config/php/conn.php';
+              $sql = "SELECT id, comunidade FROM comunidades";
+              $result = $conn->query($sql);
+              if($result && $result->num_rows > 0) {
+                while($row = $result->fetch_assoc()) {
+                  echo '<option value="' . htmlspecialchars($row['id']) . '">' . htmlspecialchars($row['comunidade']) . '</option>';
+                }
+              }
             ?>
             <option value="outra">Outra (não encontrada)</option>
           </select>
@@ -74,7 +79,7 @@
         </div>
 
         <div class="form-actions">
-          <button type="submit" class="btn-primary">Criar conta</button>
+          <button type="submit" name="submit" class="btn-primary">Criar conta</button>
           <div class="auth-links">
             <a href="../login/login.html" class="text-link">Já tem conta? Faça login</a>
           </div>

@@ -1,12 +1,12 @@
 <?php
 session_start();
-if (isset($_POST['submit']) && !empty($_POST['email']) && !empty($_POST['senha'])) {
+if (isset($_POST['submit']) && !empty($_POST['email']) && !empty($_POST['senha_hash'])) {
 
-    include_once('../config/conn.php');
+    include_once __DIR__ . '/../config/php/conn.php';
 
     // Coleta os dados do formulário
     $email = trim($_POST['email']);
-    $senha = trim($_POST['senha']);
+    $senha = trim($_POST['senha_hash']);
 
     // Verifica se o email existe no banco de dados
     $sql = "SELECT * FROM usuarios WHERE email = ?";
@@ -24,34 +24,30 @@ if (isset($_POST['submit']) && !empty($_POST['email']) && !empty($_POST['senha']
         // Verifica se a senha fornecida corresponde à hash armazenada
         if ($senha === $usuario['senha'] or password_verify($senha, $usuario['senha'])) {
             $_SESSION['email'] = $email;
-            $_SESSION['senha'] = $senha;
+            $_SESSION['senha_hash'] = $senha;
             $_SESSION['nome'] = $usuario['nome'];
-            $_SESSION['nivel_usuario'] = $usuario['nivel_usuario'];
-            $_SESSION['tema'] = $usuario['tema'];
+            // $_SESSION['nivel_usuario'] = $usuario['nivel_usuario'];
+            // $_SESSION['tema'] = $usuario['tema'];
 
             // Redireciona para diferentes páginas com base no nível do usuário
-            if ($usuario['nivel_usuario'] === 'Admin') {
-                header("Location: ../admin/admin.php");
-            }  elseif ($usuario['nivel_usuario'] === 'CEO') {
-                header("Location: ../ceo/index.php");
-            }
+            header("Location: ../projetoPrincipal/projeto.html");
             exit();
         } else {
             unset($_SESSION['email']);
-            unset($_SESSION['senha']);
+            unset($_SESSION['senha_hash']);
             echo "<script>alert('Senha incorreta!');</script>";
-            header("Location: login.html");
+            header("Location: ../login/login.html");
             exit();
         }
     } else {
         echo "<script>alert('Usuário não encontrado!');</script>";
-        header("Location: login.html");
+        header("Location: ../login/login.html");
         exit();
     }
 
     $stmt->close();
     $conn->close();
 } else {
-    header('Location: login.html');
+    header('Location: ../login/login.html');
     exit();
 }

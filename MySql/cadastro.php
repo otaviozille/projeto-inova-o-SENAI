@@ -1,5 +1,5 @@
 <?php
-include_once __DIR__ . '/../config/php/conn.php';  // incluir conexão
+include_once __DIR__ . '/../config/php/conn.php';
 
 if (!isset($conn)) {
     die('Erro: conexão $conn não definida.');
@@ -17,15 +17,20 @@ $senha      = $_POST['password'] ?? '';
 $senhaHash = password_hash($senha, PASSWORD_DEFAULT);
 
 // Insere no banco usando prepared statement
-$stmt = $conn->prepare("INSERT INTO usuarios (nome, email, cpf, telefone, comunidade, senha) VALUES (?, ?, ?, ?, ?, ?)");
+$stmt = $conn->prepare("INSERT INTO usuarios (nome, email, cpf, telefone, comunidade_id, senha_hash) VALUES (?, ?, ?, ?, ?, ?)");
 if ($stmt) {
     $stmt->bind_param("ssssss", $nome, $email, $cpf, $telefone, $comunidade, $senhaHash);
     $stmt->execute();
 
     if ($stmt->affected_rows > 0) {
-        echo "Cadastro realizado com sucesso!";
+        echo "<script>
+        alert('Cadastro realizado com sucesso!');
+        window.location.href = '../login/login.html';
+        </script>";
+        exit();
     } else {
-        echo "Erro ao cadastrar.";
+        header("Location: ../cadastro/cadastro.html?error=erro_cadastro");
+        exit();
     }
 
     $stmt->close();
