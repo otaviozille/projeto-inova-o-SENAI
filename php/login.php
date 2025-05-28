@@ -2,7 +2,7 @@
 session_start();
 if (isset($_POST['submit']) && !empty($_POST['email']) && !empty($_POST['senha_hash'])) {
 
-    include_once __DIR__ . '/../config/php/conn.php';
+    include_once '../config/conn.php';
 
     // Coleta os dados do formulário
     $email = trim($_POST['email']);
@@ -29,8 +29,7 @@ if (isset($_POST['submit']) && !empty($_POST['email']) && !empty($_POST['senha_h
             // $_SESSION['nivel_usuario'] = $usuario['nivel_usuario'];
             // $_SESSION['tema'] = $usuario['tema'];
 
-            // Redireciona para diferentes páginas com base no nível do usuário
-            header("Location: ../projetoPrincipal/projeto.html");
+            header("Location: ../projetoPrincipal/index.php");
             exit();
         } else {
             unset($_SESSION['email']);

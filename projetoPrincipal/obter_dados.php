@@ -1,17 +1,6 @@
 <?php
 // Configuração de conexão com o banco de dados
-$servername = "localhost";
-$username = "root"; 
-$password = "";     
-$dbname = "comunidades";
-
-// Cria a conexão com o banco de dados
-$conn = new mysqli($servername, $username, $password, $dbname);
-
-// Verifica se há erro de conexão
-if ($conn->connect_error) {
-    die("Erro de conexão: " . $conn->connect_error);
-}
+include_once '../config/conn.php';
 
 // Função para inicializar contadores
 function inicializaContadores($opcoes) {

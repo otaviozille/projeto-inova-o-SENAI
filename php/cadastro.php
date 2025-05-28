@@ -1,5 +1,5 @@
 <?php
-include_once __DIR__ . '/../config/php/conn.php';
+include_once '../config/conn.php';
 
 if (!isset($conn)) {
     die('Erro: conexão $conn não definida.');

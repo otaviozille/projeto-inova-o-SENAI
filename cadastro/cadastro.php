@@ -24,7 +24,7 @@
       }
       ?>
 
-      <form id="cadastroForm" class="auth-form" method="post" action="../MySql/cadastro.php" novalidate>
+      <form id="cadastroForm" class="auth-form" method="POST" action="../php/cadastro.php" novalidate>
         <div class="form-group">
           <label for="nome">Nome completo</label>
           <input type="text" id="nome" name="nome" required placeholder="Ex: João da Silva" />

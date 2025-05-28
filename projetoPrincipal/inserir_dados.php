@@ -1,17 +1,5 @@
 <?php
-// Configurações do banco de dados
-$servername = "localhost";
-$username = "root";
-$password = "";
-$dbname = "comunidades";
-
-// Criar conexão com o banco de dados
-$conn = new mysqli($servername, $username, $password, $dbname);
-
-// Verificar a conexão
-if ($conn->connect_error) {
-    die("Conexão falhou: " . $conn->connect_error);
-}
+include_once '../config/conn.php';
 
 // Coletar dados do formulário de cadastro
 $comunidade = $_POST['comunidade'];
@@ -35,4 +23,3 @@ if ($conn->query($sql) === TRUE) {
 
 // Fechar a conexão
 $conn->close();
-?>
