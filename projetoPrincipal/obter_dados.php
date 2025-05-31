@@ -1,5 +1,5 @@
 <?php
-// Configuração de conexão com o banco de dados
+// Configuração de conexão com o banco de comunidades
 include_once '../config/conn.php';
 
 // Função para inicializar contadores
@@ -11,7 +11,7 @@ function inicializaContadores($opcoes) {
     return $contadores;
 }
 
-// Inicializa os dados para as métricas
+// Inicializa os comunidades para as métricas
 $educacao = inicializaContadores(['bom', 'moderado', 'ruim']);
 $agua = inicializaContadores(['bom', 'moderado', 'ruim']);
 $saude = inicializaContadores(['bom', 'moderado', 'ruim']);
@@ -22,42 +22,42 @@ $total_renda = 0;
 $total_registros = 0;
 
 // Consulta para obter dados de educação
-$sql_educacao = "SELECT educacao, COUNT(*) as quantidade FROM dados GROUP BY educacao";
+$sql_educacao = "SELECT educacao, COUNT(*) as quantidade FROM comunidades GROUP BY educacao";
 $result_educacao = $conn->query($sql_educacao);
 while ($row_educacao = $result_educacao->fetch_assoc()) {
     $educacao[$row_educacao['educacao']] = $row_educacao['quantidade'];
 }
 
 // Consulta para obter dados de acesso à água
-$sql_agua = "SELECT agua, COUNT(*) as quantidade FROM dados GROUP BY agua";
+$sql_agua = "SELECT agua, COUNT(*) as quantidade FROM comunidades GROUP BY agua";
 $result_agua = $conn->query($sql_agua);
 while ($row_agua = $result_agua->fetch_assoc()) {
     $agua[$row_agua['agua']] = $row_agua['quantidade'];
 }
 
 // Consulta para obter dados de saúde
-$sql_saude = "SELECT saude, COUNT(*) as quantidade FROM dados GROUP BY saude";
+$sql_saude = "SELECT saude, COUNT(*) as quantidade FROM comunidades GROUP BY saude";
 $result_saude = $conn->query($sql_saude);
 while ($row_saude = $result_saude->fetch_assoc()) {
     $saude[$row_saude['saude']] = $row_saude['quantidade'];
 }
 
 // Consulta para obter dados de moradia
-$sql_moradia = "SELECT moradia, COUNT(*) as quantidade FROM dados GROUP BY moradia";
+$sql_moradia = "SELECT moradia, COUNT(*) as quantidade FROM comunidades GROUP BY moradia";
 $result_moradia = $conn->query($sql_moradia);
 while ($row_moradia = $result_moradia->fetch_assoc()) {
     $moradia[$row_moradia['moradia']] = $row_moradia['quantidade'];
 }
 
 // Consulta para obter dados de emprego
-$sql_emprego = "SELECT emprego, COUNT(*) as quantidade FROM dados GROUP BY emprego";
+$sql_emprego = "SELECT emprego, COUNT(*) as quantidade FROM comunidades GROUP BY emprego";
 $result_emprego = $conn->query($sql_emprego);
 while ($row_emprego = $result_emprego->fetch_assoc()) {
     $emprego[$row_emprego['emprego']] = $row_emprego['quantidade'];
 }
 
 // Consulta para calcular a média de renda
-$sql_renda = "SELECT renda FROM dados";
+$sql_renda = "SELECT renda FROM comunidades";
 $result_renda = $conn->query($sql_renda);
 while ($row_renda = $result_renda->fetch_assoc()) {
     $total_renda += $row_renda['renda'];

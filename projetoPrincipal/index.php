@@ -108,7 +108,7 @@ $logado = $_SESSION['email'];
                         <option value="baixo">Baixo</option>
                     </select>
                 </div>
-                <button type="submit" class="btn btn-primary w-100">Enviar Dados</button>
+                <button type="submit" name="submit" class="btn btn-primary w-100">Enviar Dados</button>
             </form>
         </section>
 
