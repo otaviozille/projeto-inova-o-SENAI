@@ -1,3 +1,19 @@
+<?php
+/* session_start();
+include_once '../config/conn.php';
+
+if (!isset($_SESSION['email'])) {
+    header('Location: ../login/login.html');
+    exit();
+}
+
+$email = $_SESSION['email'];
+
+$logado = $_SESSION['email'];
+*/ 
+?>
+
+
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
@@ -20,7 +36,7 @@
       <div class="container">
         <div class="cabecalho-painel">
           <h2>Painel Administrativo</h2>
-          <button class="btn-logout">Logout</button>
+          <button class="btn-logout"><a style="text-decoration: none; color:white;" href="../config/logout.php">Logout</a></button>
         </div>
 
         <div class="filtro-cidade">

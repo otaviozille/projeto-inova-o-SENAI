@@ -50,6 +50,7 @@ $logado = $_SESSION['email'];
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item"><a class="nav-link" href="#formulario">Inserir Dados</a></li>
                     <li class="nav-item"><a class="nav-link" href="#dashboard">Dashboard</a></li>
+                    <li class="nav-item"><a class="nav-link" href="../config/logout.php">Sair</a></li>
                 </ul>
             </div>
         </div>
