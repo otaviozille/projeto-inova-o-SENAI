@@ -1,6 +1,6 @@
 :root {
-  --primary-color: #00458F;
-  --secondary-color: #FFC220;
+  --primary-color: #00458f;
+  --secondary-color: #ffc220;
   --text-dark: #ffffff;
   --text-light: #2d3436;
   --error-color: #e74c3c;
@@ -15,19 +15,20 @@
 }
 
 body {
-  font-family: 'Roboto', sans-serif;
-  background-image: url('../imgs/fundo-login-claro.jpg');
-  background-size: cover; 
+  font-family: "Roboto", sans-serif;
+  background-image: url("../imgs/fundo-login-claro.jpg");
+  background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
   background-attachment: fixed;
   color: var(--text-light);
   line-height: 1.6;
-  transition: background-color var(--transition-speed), color var(--transition-speed);
+  transition: background-color var(--transition-speed),
+    color var(--transition-speed);
 }
 
 body.dark {
-  background-image: url('../imgs/fundo-login-escuro.jpg');
+  background-image: url("../imgs/fundo-login-escuro.jpg");
   color: var(--text-dark);
 }
 
@@ -42,7 +43,8 @@ body.dark::before {
   background: rgba(0, 0, 0, 0.6);
 }
 
-html, body {
+html,
+body {
   height: auto;
   min-height: 100vh;
 }
