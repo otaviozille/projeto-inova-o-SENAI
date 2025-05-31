@@ -1,25 +1,31 @@
 <?php
 include_once '../config/conn.php';
 
-// Coletar dados do formulário de cadastro
-$comunidade = $_POST['comunidade'];
-$educacao = $_POST['educacao'];
-$agua = $_POST['agua'];
-$renda = $_POST['renda'];
-$saude = $_POST['saude'];
-$moradia = $_POST['moradia'];
-$emprego = $_POST['emprego'];
+$stmt = $conn->prepare("INSERT INTO comunidades (comunidade, educacao, agua, renda, saude, moradia, emprego) VALUES (?, ?, ?, ?, ?, ?, ?)");
 
-// Inserir dados no banco de dados
-$sql = "INSERT INTO comunidades (comunidade, educacao, agua, renda, saude, moradia, emprego) VALUES ('$comunidade', '$educacao', '$agua', '$renda', '$saude', '$moradia', '$emprego')";
+if ($stmt) {
+    $stmt->bind_param(
+        "sssdsss",
+        $_POST['comunidade'],
+        $_POST['educacao'],
+        $_POST['agua'],
+        $_POST['renda'],
+        $_POST['saude'],
+        $_POST['moradia'],
+        $_POST['emprego']
+    );
 
-if ($conn->query($sql) === TRUE) {
-    echo "<script>alert('Cadastro Realizado!!')</script>";
-    header("Location: index.php");
-    exit();
+    if ($stmt->execute()) {
+        echo "<script>
+            alert('Dados inseridos com sucesso!');
+            window.location.href = 'index.php';
+        </script>";
+    } else {
+        echo "Erro ao cadastrar: " . $stmt->error;
+    }
+    $stmt->close();
 } else {
-    echo "Erro ao cadastrar: " . $conn->error;
+    echo "Erro na preparação da query: " . $conn->error;
 }
 
-// Fechar a conexão
 $conn->close();

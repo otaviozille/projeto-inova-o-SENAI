@@ -3,7 +3,8 @@
 include_once '../config/conn.php';
 
 // Função para inicializar contadores
-function inicializaContadores($opcoes) {
+function inicializaContadores($opcoes)
+{
     $contadores = [];
     foreach ($opcoes as $opcao) {
         $contadores[$opcao] = 0;
@@ -67,6 +68,29 @@ if ($total_registros > 0) {
     $renda_media = $total_renda / $total_registros;
 }
 
+// Adicionar consulta para nomes das comunidades
+$sql_comunidades = "SELECT comunidade, COUNT(*) as total FROM comunidades";
+$result_comunidades = $conn->query($sql_comunidades);
+$comunidades_total = $result_comunidades->num_rows;
+
+// Consulta para estatísticas detalhadas de renda
+$sql_renda_stats = "SELECT 
+    MIN(renda) as min_renda,
+    MAX(renda) as max_renda,
+    AVG(renda) as media_renda,
+    COUNT(*) as total_comunidades
+    FROM comunidades";
+$result_renda_stats = $conn->query($sql_renda_stats);
+$renda_stats = $result_renda_stats->fetch_assoc();
+
+// Consulta para lista de comunidades e suas rendas
+$sql_comunidades_renda = "SELECT comunidade, renda FROM comunidades ORDER BY renda DESC";
+$result_comunidades_renda = $conn->query($sql_comunidades_renda);
+$comunidades_renda = [];
+while ($row = $result_comunidades_renda->fetch_assoc()) {
+    $comunidades_renda[] = $row;
+}
+
 // Retorna os dados no formato JSON para o frontend
 echo json_encode([
     'educacao' => $educacao,
@@ -74,9 +98,15 @@ echo json_encode([
     'saude' => $saude,
     'moradia' => $moradia,
     'emprego' => $emprego,
-    'renda' => ['media' => $renda_media]
+    'renda' => [
+        'media' => $renda_media,
+        'minima' => $renda_stats['min_renda'],
+        'maxima' => $renda_stats['max_renda'],
+        'total_comunidades' => $renda_stats['total_comunidades']
+    ],
+    'comunidades_renda' => $comunidades_renda,
+    'total_comunidades' => $comunidades_total
 ]);
 
 // Fecha a conexão com o banco de dados
 $conn->close();
-?>
