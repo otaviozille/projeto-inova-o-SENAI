@@ -1,3 +1,19 @@
+<?php
+session_start();
+include_once '../config/conn.php';
+
+if (!isset($_SESSION['email'])) {
+    header('Location: ../login/login.html');
+    exit();
+}
+
+$email = $_SESSION['email'];
+
+$logado = $_SESSION['email'];
+?>
+
+
+
 <!DOCTYPE html>
 <html lang="pt-BR">
 
@@ -16,20 +32,6 @@
 </head>
 
 <body>
-
-    <?php
-    session_start();
-    include_once '../config/conn.php';
-
-    if (!isset($_SESSION['email'])) {
-        header('Location: ../login/login.html');
-        exit();
-    }
-
-    $email = $_SESSION['email'];
-
-    $logado = $_SESSION['email'];
-    ?>
 
     <header class="bg-primary text-white text-center py-5">
         <div class="container">

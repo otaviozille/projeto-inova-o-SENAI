@@ -1,4 +1,5 @@
 <?php
+session_start();
 include_once '../config/conn.php';
 
 if (!isset($conn)) {
@@ -16,10 +17,13 @@ $senha      = $_POST['password'] ?? '';
 // Hash da senha
 $senhaHash = password_hash($senha, PASSWORD_DEFAULT);
 
+// Converte comunidade para inteiro
+$comunidade = (int)$comunidade;
+
 // Insere no banco usando prepared statement
-$stmt = $conn->prepare("INSERT INTO usuarios (nome, email, cpf, telefone, comunidade_id, senha_hash) VALUES (?, ?, ?, ?, ?, ?)");
+$stmt = $conn->prepare("INSERT INTO usuarios (nome, email, cpf, telefone, comunidade_id, password) VALUES (?, ?, ?, ?, ?, ?)");
 if ($stmt) {
-    $stmt->bind_param("ssssss", $nome, $email, $cpf, $telefone, $comunidade, $senhaHash);
+    $stmt->bind_param("ssssis", $nome, $email, $cpf, $telefone, $comunidade, $senhaHash);
     $stmt->execute();
 
     if ($stmt->affected_rows > 0) {
