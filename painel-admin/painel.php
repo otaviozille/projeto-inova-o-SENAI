@@ -1,5 +1,5 @@
 <?php
-/* session_start();
+session_start();
 include_once '../config/conn.php';
 
 if (!isset($_SESSION['email'])) {
@@ -10,7 +10,6 @@ if (!isset($_SESSION['email'])) {
 $email = $_SESSION['email'];
 
 $logado = $_SESSION['email'];
-*/ 
 ?>
 
 

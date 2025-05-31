@@ -36,7 +36,7 @@
 
          <div class="form-group">
            <label for="email">E-mail</label>
-           <input type="email" id="email" name="email" required pattern=".+@gmail\.com\.br" placeholder="seunome@gmail.com.br" />
+           <input type="email" id="email" name="email" required pattern=".+@gmail\.com\.br" placeholder="exemplo@gmail.com.br" />
          </div>
 
          <div class="form-row">

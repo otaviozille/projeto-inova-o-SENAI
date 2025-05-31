@@ -49,7 +49,6 @@ $logado = $_SESSION['email'];
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item"><a class="nav-link" href="#formulario">Inserir Dados</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#dashboard">Dashboard</a></li>
                     <li class="nav-item"><a class="nav-link" href="../config/logout.php">Sair</a></li>
                 </ul>
             </div>
@@ -60,11 +59,7 @@ $logado = $_SESSION['email'];
         <!-- Formulário para Inserção de Dados -->
         <section id="formulario" class="container my-5">
             <h2 class="text-center mb-4">Inserir Dados</h2>
-            <form class="p-4 border rounded shadow" method="POST" action="inserir_dados.php">
-                <div class="mb-3">
-                    <label for="comunidade" class="form-label">Comunidade:</label>
-                    <input type="text" class="form-control" id="comunidade" name="comunidade" required>
-                </div>
+            <form class="p-4 border rounded shadow" method="POST" action="">
                 <div class="mb-3">
                     <label for="educacao" class="form-label">Acesso à Educação:</label>
                     <select class="form-select" id="educacao" name="educacao" required>
@@ -83,7 +78,7 @@ $logado = $_SESSION['email'];
                 </div>
                 <div class="mb-3">
                     <label for="renda" class="form-label">Renda Familiar Média (R$):</label>
-                    <input type="number" class="form-control" id="renda" name="renda" required>
+                    <input type="number" class="form-control" id="renda" name="renda" placeholder="Ex: 2500" required>
                 </div>
                 <div class="mb-3">
                     <label for="saude" class="form-label">Condições de Saúde:</label>
@@ -112,32 +107,6 @@ $logado = $_SESSION['email'];
                 <button type="submit" name="submit" class="btn btn-primary w-100">Enviar Dados</button>
             </form>
         </section>
-
-        <!-- Dashboard -->
-        <section id="dashboard" class="container my-5">
-            <h2 class="text-center mb-4">Dashboard</h2>
-            <div class="row">
-                <div class="col-lg-6 mb-4">
-                    <canvas id="chart1"></canvas>
-                </div>
-                <div class="col-lg-6 mb-4">
-                    <canvas id="chart2"></canvas>
-                </div>
-                <div class="col-lg-6 mb-4">
-                    <canvas id="chart3"></canvas>
-                </div>
-                <div class="col-lg-6 mb-4">
-                    <canvas id="chart4"></canvas>
-                </div>
-                <div class="col-lg-6 mb-4">
-                    <canvas id="chart5"></canvas>
-                </div>
-                <div class="col-lg-6 mb-4">
-                    <canvas id="chart6"></canvas>
-                </div>
-            </div>
-        </section>
-    </main>
 
     <footer class="bg-dark text-white text-center py-3">
         <p>&copy; 2024 Petrobras - Desenvolvimento Comunitário</p>
