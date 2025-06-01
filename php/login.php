@@ -24,7 +24,7 @@ if (isset($_POST['submit']) && !empty($_POST['email']) && !empty($_POST['passwor
 
             switch ($usuario['nivel_usuario']) {
                 case 'Admin':
-                    header("Location: ../painel-admin/painel.php");
+                    header("Location: ../painel-admin/painel.php"); 
                     break;
                 case 'Morador':
                     header("Location: ../page-user/index.php");
