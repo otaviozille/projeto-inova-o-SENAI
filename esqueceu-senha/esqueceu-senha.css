@@ -1,110 +1,142 @@
+/* Variáveis de cor e transição */
+:root {
+  --primary-color: #00458f;
+  --secondary-color: #ffc220;
+  --text-dark: #ffffff;
+  --text-light: #2d3436;
+  --error-color: #e74c3c;
+  --border-radius: 8px;
+  --transition-speed: 0.3s;
+}
+
 /* Fonte e reset básico */
 body {
-  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-  background-image: url("../imgs/fundo-login-claro.jpg");
   margin: 0;
-  padding: 0;
+  font-family: "Roboto", sans-serif;
+  background-image: url("../imgs/fundo-login-claro.jpg");
+  background-size: cover;
+  background-position: center;
+  min-height: 100vh;
   display: flex;
-  justify-content: center;
   align-items: center;
-  height: 100vh;
-  color: #333;
+  justify-content: center;
+  transition: background-color var(--transition-speed);
+}
+
+body.dark {
+  background-image: url("../imgs/fundo-login-escuro.jpg");
+  color: var(--text-dark);
 }
 
 /* Caixa central */
 .container {
-  background: #fff;
-  padding: 2.5rem 2rem;
-  border-radius: 12px;
-  box-shadow: 0 12px 25px rgba(0, 0, 0, 0.15);
+  width: 100%;
   max-width: 400px;
-  width: 90%;
-  text-align: center;
-  transition: transform 0.3s ease;
+  padding: 20px;
 }
 
-.container:hover {
-  transform: translateY(-5px);
+.recovery-box {
+  background-color: rgba(255, 255, 255, 0.9);
+  padding: 2rem;
+  border-radius: var(--border-radius);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+body.dark .recovery-box {
+  background-color: rgba(30, 30, 30, 0.9);
 }
 
 /* Título */
 h1 {
-  font-size: 2rem;
-  margin-bottom: 0.5rem;
-  color: #007bff;
-  font-weight: 700;
+  color: var(--primary-color);
+  text-align: center;
+  margin-bottom: 1rem;
 }
 
 /* Parágrafo */
-p {
-  font-size: 1rem;
-  margin-bottom: 1.8rem;
-  color: #555;
+.description {
+  text-align: center;
+  margin-bottom: 2rem;
+  color: #666;
 }
 
-/* Campo email */
-input[type="email"] {
+/* Campos de entrada */
+.input-group {
+  margin-bottom: 1.5rem;
+}
+
+label {
+  display: block;
+  margin-bottom: 0.5rem;
+  color: var(--text-light);
+}
+
+input {
   width: 92%;
-  padding: 12px 15px;
-  margin-bottom: 1.4rem;
-  border: 2px solid #ccc;
-  border-radius: 8px;
+  padding: 0.8rem;
+  border: 1px solid #ddd;
+  border-radius: var(--border-radius);
   font-size: 1rem;
-  transition: border-color 0.3s ease;
 }
 
-input[type="email"]:focus {
-  outline: none;
-  border-color: #007bff;
-  box-shadow: 0 0 8px rgba(0, 123, 255, 0.4);
+/* Mensagem de erro */
+.error-message {
+  color: var(--error-color);
+  font-size: 0.875rem;
+  margin-top: 0.5rem;
+  display: block;
 }
 
 /* Botão enviar */
-button {
-  background-color: #007bff;
+.submit-btn {
+  width: 100%;
+  padding: 0.8rem;
+  background-color: var(--primary-color);
   color: white;
   border: none;
-  padding: 12px 25px;
-  border-radius: 8px;
+  border-radius: var(--border-radius);
   cursor: pointer;
-  font-size: 1.1rem;
-  font-weight: 600;
-  transition: background-color 0.3s ease, box-shadow 0.3s ease;
-  width: 100%;
+  font-size: 1rem;
+  transition: background-color var(--transition-speed);
 }
 
-button:hover,
-button:focus {
-  background-color: #0056b3;
-  box-shadow: 0 6px 12px rgba(0, 86, 179, 0.6);
-  outline: none;
+.submit-btn:hover {
+  background-color: #003366;
 }
 
 /* Link voltar */
 .back-link {
-  display: inline-block;
-  margin-top: 1.8rem;
-  color: #0056b3;
-  font-weight: 600;
+  display: block;
+  text-align: center;
+  margin-top: 1.5rem;
+  color: var(--primary-color);
   text-decoration: none;
-  transition: color 0.3s ease;
 }
 
-.back-link:hover,
-.back-link:focus {
-  color: #003366;
-  text-decoration: underline;
-  outline: none;
+/* Botão de tema */
+.theme-btn {
+  position: fixed;
+  top: 1rem;
+  right: 1rem;
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+  z-index: 1000;
 }
 
-/* Responsividade simples */
-@media (max-width: 420px) {
-  .container {
-    padding: 2rem 1rem;
-  }
+/* Ajustes para modo escuro */
+body.dark label,
+body.dark .description {
+  color: var(--text-dark);
+}
 
-  button {
-    font-size: 1rem;
-    padding: 10px;
-  }
+body.dark input {
+  background-color: rgba(40, 40, 40, 0.9);
+  border-color: #666;
+  color: white;
+}
+
+body.dark .back-link {
+  color: var(--secondary-color);
 }
