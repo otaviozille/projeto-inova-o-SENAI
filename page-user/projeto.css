@@ -9,7 +9,6 @@
     --bs-primary: #00843d;
 }
 
-/* Corpo e fonte do site */
 body {
     font-family: 'Roboto', sans-serif;
     background-color: var(--background-light);
@@ -43,12 +42,15 @@ body.dark {
     padding: 2rem 1rem 1rem;
 }
 
-/* Cabeçalho */
+/* ==== HEADER ATUALIZADO ==== */
 header.topo {
     background-color: var(--primary-color);
     color: #fff;
-    padding: 1rem;
+    padding: 0.3rem 1rem 0.2rem;
     position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 body.dark header.topo {
@@ -58,42 +60,49 @@ body.dark header.topo {
 .cabecalho-topo {
     display: flex;
     align-items: center;
-    gap: 1rem;
+    gap: 0.75rem;
+    width: 100%;
 }
 
 .logo-petro {
-    height: 70px;
-    margin-left: 0;
+    height: 45px;
 }
 
 .titulo-topo {
     flex-grow: 1;
 }
 
+.subtitulo-pequeno {
+    font-size: 1.2rem;
+    line-height: 1.1;
+    margin: 0;
+    font-weight: normal;
+}
+
+.subtitulo-pequeno span {
+    font-size: 1.2rem;
+    font-style: italic;
+}
+
 .titulo-pagina {
-    text-align: center;
-    margin-top: 0.5rem;
-    font-size: 1.25rem;
-}
-
-header.topo h1 {
     font-size: 1.5rem;
+    margin: 0.3rem 0 0.2rem;
+    padding: 0;
     line-height: 1.2;
+    font-weight: bold;
+    text-align: center;
 }
 
-header.topo h1 span {
-    font-weight: 800;
-}
-
-header.topo p {
-    margin-top: 0.5rem;
-    font-size: 0.9rem;
+/* ==== RESTANTE DO CSS ==== */
+.botoes-header {
+    display: flex;
+    gap: 0.5rem;
+    position: absolute;
+    top: 0.5rem;
+    right: 1rem;
 }
 
 .btn-logout {
-    position: absolute;
-    top: 1rem;
-    right: 1rem;
     background: var(--dark-color);
     color: #fff;
     border: none;
@@ -109,22 +118,22 @@ header.topo p {
 }
 
 .theme-btn {
-    position: fixed;
-    top: 1rem;
-    right: 4rem;
     background: none;
     border: none;
     color: var(--primary-color);
     font-size: 1.5rem;
     cursor: pointer;
-    z-index: 1000;
+    z-index: 10;
 }
 
 body.dark .theme-btn {
     color: var(--secondary-color);
 }
 
-/* Botão principal */
+body .theme-btn {
+    position: static;
+}
+
 form .btn-primary {
     background-color: var(--primary-color);
     color: #fff;
@@ -188,7 +197,6 @@ body.dark form .btn-primary:hover {
     background-color: #0e2a4d;
 }
 
-/* Cards para os gráficos */
 .card {
     display: flex;
     justify-content: center;
@@ -198,7 +206,7 @@ body.dark form .btn-primary:hover {
     background-color: #fff;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
     transition: box-shadow 0.3s ease, transform 0.2s ease;
-    height: 400px; /* Altura fixa para todos os cards */
+    height: 400px;
 }
 
 .card:hover {
@@ -206,7 +214,6 @@ body.dark form .btn-primary:hover {
     transform: translateY(-5px);
 }
 
-/* Gráficos */
 canvas {
     width: 100% !important;
     max-width: 400px;
@@ -214,7 +221,6 @@ canvas {
     max-height: 350px;
 }
 
-/* Layout do Dashboard */
 .dashboard-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
@@ -222,18 +228,17 @@ canvas {
     margin-top: 30px;
 }
 
-/* Responsividade */
 @media (max-width: 768px) {
     header h1 {
-        font-size: 2rem;
+        font-size: 1.5rem;
     }
 
     header p {
-        font-size: 1rem;
+        font-size: 0.9rem;
     }
 
     .card {
-        height: auto; /* Ajuste automático para telas pequenas */
+        height: auto;
     }
 
     footer {
