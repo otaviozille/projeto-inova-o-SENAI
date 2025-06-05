@@ -29,6 +29,7 @@ if ($result->num_rows === 0) {
   <link
     href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap"
     rel="stylesheet" />
+    <link rel="icon" href="../imgs/fav.icon.png" type="image/x-icon">
 </head>
 
 <body>
