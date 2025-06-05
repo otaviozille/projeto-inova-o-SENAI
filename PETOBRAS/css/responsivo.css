@@ -1,0 +1,145 @@
+
+@media screen and (max-width: 884px) {
+    /* Oculta o menu e exibe o hambúrguer em telas menores */
+    .menu {
+        display: none; /* Oculta o menu */
+        flex-direction: column;
+        width: 100%;
+        text-align: center;
+        background-color: white;
+        
+    }
+
+    /* Exibe o ícone de hambúrguer */
+    .hamburguer {
+        display: flex;
+        position:static;
+        text-align: right;
+    }
+
+
+    /* Exibe o menu quando a classe 'active' for adicionada */
+    .menu.active {
+        
+        display: flex;
+        margin-top: 39vh;
+        
+    }
+
+    .menu a {
+        padding: 15px;
+        font-size: 14px;
+        
+    }
+
+    .menu .canto{
+        display: flex;
+    }
+
+    
+    .img-headline {
+        width: 100%;
+        height: auto;
+        margin-bottom: 15px;
+    }
+
+    .opcoes-container {
+        margin-bottom: 30px; 
+    }
+
+    .opcoes {
+        display: flex;
+        justify-content: space-between;
+        gap: 10px;
+        padding: 0 10px;
+    }
+
+    .btn-opcao1, .btn-opcao {
+        flex: 1;
+        padding: 15px;
+        font-size: 16px;
+        text-align: center;
+    }
+
+    .conteudos {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 20px;
+        padding: 0 20px;
+    }
+
+    .card {
+        text-align: center;
+        padding: 15px;
+        box-sizing: border-box;
+        width: 100%;
+    }
+
+    .card img {
+        width: 100%;
+        height: auto;
+        margin-bottom: 10px;
+    }
+
+    .card h3 {
+        font-size: 18px;
+        margin-top: 10px;
+    }
+
+    .card .textoPrincipal {
+        font-size: 14px;
+    }
+
+
+    .headline-content h2 {
+        font-size: 20px;
+        margin-bottom: 10px;
+    }
+
+    .btnduvida {
+        display: block;
+        font-size: 16px;
+        padding: 10px 20px;
+        margin-top: 10px;
+    }
+
+   
+    .caixa-acessibilidade {
+        width: 100%;
+        padding: 20px;
+        margin-top: 20px;
+    }
+
+    .ferramentas {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-around;
+        gap: 10px;
+    }
+
+    .ferramentas li {
+        font-size: 16px;
+        width: 48%;
+        margin-bottom: 10px;
+        box-sizing: border-box;
+    }
+
+    .icone-acessibilidade {
+        display: block;
+        margin: 0 auto;
+        width: 50px;
+    }
+
+
+    body {
+        overflow-x: hidden;
+    }
+
+}
+
+.primeiro-texto h2 {
+    font-family: 'Poppins', Helvetica, Arial, Lucida, sans-serif;
+    color: #000000;
+    position: center;
+    font-size: 30px;
+}
