@@ -7,11 +7,33 @@ if (!isset($_SESSION['email'])) {
     exit();
 }
 
-$email = $_SESSION['email'];
+$comunidades = [];
+$estados = [];
+$cidadesPorEstado = [];
 
-$logado = $_SESSION['email'];
+$sql = "SELECT id, comunidade, cidade, estado, educacao, agua, renda, saude, moradia, emprego FROM comunidades";
+$result = mysqli_query($conn, $sql);
+
+if ($result && mysqli_num_rows($result) > 0) {
+    while ($row = mysqli_fetch_assoc($result)) {
+        $comunidades[] = $row;
+        $estado = $row['estado'];
+        $cidade = $row['cidade'];
+
+        if (!in_array($estado, $estados)) {
+            $estados[] = $estado;
+        }
+
+        if (!isset($cidadesPorEstado[$estado])) {
+            $cidadesPorEstado[$estado] = [];
+        }
+
+        if (!in_array($cidade, $cidadesPorEstado[$estado])) {
+            $cidadesPorEstado[$estado][] = $cidade;
+        }
+    }
+}
 ?>
-
 
 <!DOCTYPE html>
 <html lang="pt-br">
@@ -24,10 +46,15 @@ $logado = $_SESSION['email'];
 <body>
   <div class="wrapper">
     <header class="topo">
-      <div class="container">
-        <h1>DESENVOLVIMENTO<br><span>COMUNITÁRIO</span></h1>
-        <p>Empoderando as comunidades do entorno</p>
+      <div class="container cabecalho-topo">
+        <img src="../imgs/petrobras.png" alt="Logo Petrobras" class="logo-petro" />
+        <div class="titulo-topo">
+          <h1>DESENVOLVIMENTO<br><span>COMUNITÁRIO</span></h1>
+          <p>Empoderando as comunidades do entorno</p>
+        </div>
+        <a href="../page-user/index.php" class="btn-add">Adicionar nova comunidade</a>
         <button class="btn-admin">Admin</button>
+        <button class="btn-logout"><a style="text-decoration: none; color:white;" href="../config/logout.php">Logout</a></button>
       </div>
     </header>
 
@@ -35,17 +62,15 @@ $logado = $_SESSION['email'];
       <div class="container">
         <div class="cabecalho-painel">
           <h2>Painel Administrativo</h2>
-          <button class="btn-logout"><a style="text-decoration: none; color:white;" href="../config/logout.php">Logout</a></button>
         </div>
 
         <div class="filtro-cidade">
           <label for="estado">Estado:</label>
           <select id="estado" onchange="atualizarCidades(); filtrarTabela();">
             <option value="todos">Todos</option>
-            <option value="RJ">RJ</option>
-            <option value="SP">SP</option>
-            <option value="BA">BA</option>
-            <option value="CE">CE</option>
+            <?php foreach ($estados as $uf): ?>
+              <option value="<?= htmlspecialchars($uf) ?>"><?= htmlspecialchars($uf) ?></option>
+            <?php endforeach; ?>
           </select>
 
           <label for="cidade">Cidade:</label>
@@ -56,6 +81,7 @@ $logado = $_SESSION['email'];
 
         <div class="tabela">
           <h3>Comunidades Cadastradas</h3>
+          <div class="tabela-scroll">
           <table id="tabela-comunidades">
             <thead>
               <tr>
@@ -66,51 +92,38 @@ $logado = $_SESSION['email'];
               </tr>
             </thead>
             <tbody>
-              <tr>
-                <td>Vila Esperança</td>
-                <td>Rio de Janeiro</td>
-                <td>RJ</td>
-                <td><button class="btn-detalhes">Ver Detalhes</button></td>
-              </tr>
-              <tr>
-                <td>Nova Aliança</td>
-                <td>São Paulo</td>
-                <td>SP</td>
-                <td><button class="btn-detalhes">Ver Detalhes</button></td>
-              </tr>
-              <tr>
-                <td>Morada Nova</td>
-                <td>Salvador</td>
-                <td>BA</td>
-                <td><button class="btn-detalhes">Ver Detalhes</button></td>
-              </tr>
-              <tr>
-                <td>Jardim das Flores</td>
-                <td>Fortaleza</td>
-                <td>CE</td>
-                <td><button class="btn-detalhes">Ver Detalhes</button></td>
-              </tr>
+              <?php foreach ($comunidades as $com): ?>
+                <tr>
+                  <td><?= htmlspecialchars($com['comunidade']) ?></td>
+                  <td><?= htmlspecialchars($com['cidade']) ?></td>
+                  <td><?= htmlspecialchars($com['estado']) ?></td>
+                  <td><button class="btn-detalhes">Ver Detalhes</button></td>
+                </tr>
+              <?php endforeach; ?>
             </tbody>
           </table>
+          </div>
         </div>
       </div>
     </main>
 
-    <footer>
-      <div class="container">
-        <p>Administrar Petro</p>
-        <img src="logo-br.png" alt="Logo BR" />
+  </div>
+
+  <!-- Modal com detalhes -->
+  <div id="modal" class="modal" style="display:none;">
+    <div class="modal-content">
+      <span class="close" onclick="fecharModal()">&times;</span>
+      <h2 id="modal-titulo">Detalhes da Comunidade</h2>
+
+      <div id="detalhes-comunidade" style="margin-top: 20px; font-size: 16px;">
+        <!-- Detalhes inseridos via JavaScript -->
       </div>
-    </footer>
+    </div>
   </div>
 
   <script>
-    const cidadesPorEstado = {
-      RJ: ['Rio de Janeiro'],
-      SP: ['São Paulo'],
-      BA: ['Salvador'],
-      CE: ['Fortaleza']
-    };
+    const comunidades = <?= json_encode($comunidades) ?>;
+    const cidadesPorEstado = <?= json_encode($cidadesPorEstado) ?>;
 
     function atualizarCidades() {
       const estado = document.getElementById('estado').value;
@@ -118,7 +131,7 @@ $logado = $_SESSION['email'];
 
       cidadeSelect.innerHTML = '<option value="todas">Todas</option>';
 
-      if (estado !== 'todos') {
+      if (estado !== 'todos' && cidadesPorEstado[estado]) {
         cidadesPorEstado[estado].forEach(cidade => {
           const option = document.createElement('option');
           option.value = cidade;
@@ -142,6 +155,32 @@ $logado = $_SESSION['email'];
 
         linha.style.display = (estadoValido && cidadeValida) ? '' : 'none';
       });
+    }
+
+    document.querySelectorAll(".btn-detalhes").forEach((btn, index) => {
+      btn.addEventListener("click", () => {
+        const comunidade = comunidades[index];
+        abrirModal(comunidade);
+      });
+    });
+
+    function abrirModal(comunidade) {
+      document.getElementById("modal").style.display = "flex";
+      document.getElementById("modal-titulo").innerText = `Comunidade: ${comunidade.comunidade}`;
+
+      const detalhes = `
+        <p><strong>Educação:</strong> ${comunidade.educacao}</p>
+        <p><strong>Acesso à Água e Esgoto:</strong> ${comunidade.agua}</p>
+        <p><strong>Renda Média:</strong> R$ ${parseFloat(comunidade.renda).toFixed(2)}</p>
+        <p><strong>Saúde:</strong> ${comunidade.saude}</p>
+        <p><strong>Moradia:</strong> ${comunidade.moradia}</p>
+        <p><strong>Emprego:</strong> ${comunidade.emprego}</p>
+      `;
+      document.getElementById("detalhes-comunidade").innerHTML = detalhes;
+    }
+
+    function fecharModal() {
+      document.getElementById("modal").style.display = "none";
     }
   </script>
 </body>

@@ -4,11 +4,18 @@
   box-sizing: border-box;
 }
 
+:root {
+  --cor-primaria: #00843d;
+  --cor-secundaria: #ffc200;
+  --cor-escura: #173c66;
+  --cor-texto: #1a1a1a;
+}
+
 body, html {
   height: 100%;
   font-family: 'Segoe UI', sans-serif;
   background-color: #fdfdfc;
-  color: #1a1a1a;
+  color: var(--cor-texto);
 }
 
 .container {
@@ -25,10 +32,26 @@ body, html {
 }
 
 header.topo {
-  background-color: #173c66;
+  background-color: var(--cor-primaria);
   color: #fff;
   padding: 1rem;
   position: relative;
+}
+
+/* container do topo com logo */
+.cabecalho-topo {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.logo-petro {
+  height: 70px;
+  margin-left: 0;
+}
+
+.titulo-topo {
+  flex-grow: 1;
 }
 
 header h1 {
@@ -48,13 +71,36 @@ header p {
 .btn-admin {
   position: absolute;
   top: 1rem;
-  right: 1rem;
-  background: #2f4e74;
-  color: white;
+  right: 6rem;
+  background: var(--cor-secundaria);
+  color: #fff;
   border: none;
   padding: 0.4rem 0.8rem;
   border-radius: 6px;
   cursor: pointer;
+  transition: background 0.3s;
+}
+
+.btn-admin:hover {
+  background: #e5aa00;
+}
+
+.btn-add {
+  position: absolute;
+  top: 1rem;
+  right: 18rem;
+  background: var(--cor-secundaria);
+  color: #fff;
+  border: none;
+  padding: 0.4rem 0.8rem;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background 0.3s;
+  text-decoration: none;
+}
+
+.btn-add:hover {
+  background: #e5aa00;
 }
 
 main.painel {
@@ -71,19 +117,34 @@ main.painel {
   margin-top: 1rem;
 }
 
+.filtro-cidade {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin: 1rem 0;
+  align-items: center;
+}
+
+.filtro-cidade label {
+  margin-right: 0.25rem;
+}
+
 .btn-logout {
-  background: #2f4e74;
-  color: white;
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  background: var(--cor-escura);
+  color: #fff;
   border: none;
   padding: 0.4rem 0.8rem;
   border-radius: 6px;
   cursor: pointer;
-  transition: all 0.3s ease;
+  transition: background 0.3s, transform 0.3s;
 }
 
 .btn-logout:hover {
-    transform: scale(1.1);
-    background-color: #1a2b3c;
+  transform: scale(1.05);
+  background-color: #0e2a4d;
 }
 
 .tabela {
@@ -96,6 +157,19 @@ main.painel {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+}
+
+.tabela-scroll {
+  max-height: 320px; /* mostra 8 registros antes de rolar */
+  overflow-y: auto;
+}
+
+/* cabeçalho da tabela fixo durante a rolagem */
+.tabela-scroll thead th {
+  position: sticky;
+  top: 0;
+  background: #fff;
+  z-index: 1;
 }
 
 .tabela h3 {
@@ -116,12 +190,17 @@ th, td {
 }
 
 .btn-detalhes {
-  background-color: #e6731a;
+  background-color: var(--cor-secundaria);
   color: #fff;
   border: none;
   padding: 0.3rem 0.7rem;
   border-radius: 6px;
   cursor: pointer;
+  transition: background 0.3s;
+}
+
+.btn-detalhes:hover {
+  background-color: #e5aa00;
 }
 
 ul.futuro {
@@ -132,16 +211,67 @@ ul.futuro {
   color: #444;
 }
 
-footer {
-  background: #173c66;
-  color: white;
-  padding: 0.6rem 1rem;
+.modal {
+  position: fixed;
+  z-index: 1000;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.6);
   display: flex;
-  justify-content: space-between;
   align-items: center;
-  font-size: 0.9rem;
+  justify-content: center;
+  backdrop-filter: blur(3px);
 }
 
-footer img {
-  height: 25px;
+.modal-content {
+  background: #ffffff;
+  border-radius: 16px;
+  padding: 30px 35px;
+  width: 100%;
+  max-width: 550px;
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.25);
+  position: relative;
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: scale(0.95); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+.close {
+  position: absolute;
+  right: 18px;
+  top: 15px;
+  font-size: 26px;
+  font-weight: bold;
+  color: #888;
+  cursor: pointer;
+  transition: color 0.3s;
+}
+
+.close:hover {
+  color: #333;
+}
+
+#modal-titulo {
+  font-size: 24px;
+  margin-bottom: 18px;
+  color: #2a2a2a;
+  text-align: center;
+  border-bottom: 1px solid #eee;
+  padding-bottom: 10px;
+}
+
+#detalhes-comunidade p {
+  margin: 10px 0;
+  font-size: 16px;
+  color: #444;
+  line-height: 1.5;
+}
+
+#detalhes-comunidade strong {
+  color: #111;
 }
