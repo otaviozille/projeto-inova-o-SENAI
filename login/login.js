@@ -53,15 +53,19 @@ document.addEventListener("DOMContentLoaded", () => {
 
   function showError(input, message) {
     const error = input.parentElement.querySelector(".error-message");
-    error.textContent = message;
-    error.style.display = "block";
+    if (error) {
+      error.textContent = message;
+      error.style.display = "block";
+    }
     input.style.borderColor = "red";
   }
 
   function clearError(input) {
     const error = input.parentElement.querySelector(".error-message");
-    error.textContent = "";
-    error.style.display = "none";
+    if (error) {
+      error.textContent = "";
+      error.style.display = "none";
+    }
     input.style.borderColor = "";
   }
 

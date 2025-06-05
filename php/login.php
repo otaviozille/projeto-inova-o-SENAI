@@ -27,7 +27,7 @@ if (isset($_POST['submit']) && !empty($_POST['email']) && !empty($_POST['passwor
                     header("Location: ../painel-admin/painel.php"); 
                     break;
                 case 'Morador':
-                    header("Location: ../page-user/index.php");
+                    header("Location: ../petrobras/index.html");
                     break;
                 default:
                     header("Location: ../login/login.html");
