@@ -1,73 +1,191 @@
+:root {
+    --primary-color: #00843d;
+    --secondary-color: #ffc200;
+    --dark-color: #173c66;
+    --background-light: #fdfdfc;
+    --text-color: #1a1a1a;
+    --border-radius: 6px;
+    --transition-speed: 0.3s;
+    --bs-primary: #00843d;
+}
+
 /* Corpo e fonte do site */
 body {
     font-family: 'Roboto', sans-serif;
-    background-color: #f5f5f5; /* Fundo mais claro e moderno */
-    color: #333;
+    background-color: var(--background-light);
+    background-image: url('../imgs/comunidade-dia.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    color: var(--text-color);
     margin: 0;
     padding: 0;
 }
 
-/* Cabeçalho */
-header {
-    background-color: #007BFF; /* Azul profissional mais vibrante */
-    color: #fff;
-    padding: 30px 20px;
-    text-align: center;
-    border-bottom: 3px solid #0056b3;
-}
-
-header h1 {
-    font-size: 2.5rem;
-    font-weight: 700;
-    margin: 0;
-}
-
-header p {
-    font-size: 1.2rem;
-    margin-top: 10px;
-    font-weight: 300;
-}
-
-/* Navegação */
-nav.navbar {
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-}
-
-.navbar-dark .navbar-nav .nav-link {
-    font-size: 1rem;
-    font-weight: 500;
+body.dark {
+    background-color: #121212;
+    background-image: url('../imgs/comunidade-noite.png');
     color: #f5f5f5;
-    transition: color 0.3s ease;
 }
 
-.navbar-dark .navbar-nav .nav-link:hover {
-    color: #e0e0e0;
+.wrapper {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+.main-form {
+    flex: 1;
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    padding: 2rem 1rem 1rem;
+}
+
+/* Cabeçalho */
+header.topo {
+    background-color: var(--primary-color);
+    color: #fff;
+    padding: 1rem;
+    position: relative;
+}
+
+body.dark header.topo {
+    background-color: var(--dark-color);
+}
+
+.cabecalho-topo {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.logo-petro {
+    height: 70px;
+    margin-left: 0;
+}
+
+.titulo-topo {
+    flex-grow: 1;
+}
+
+.titulo-pagina {
+    text-align: center;
+    margin-top: 0.5rem;
+    font-size: 1.25rem;
+}
+
+header.topo h1 {
+    font-size: 1.5rem;
+    line-height: 1.2;
+}
+
+header.topo h1 span {
+    font-weight: 800;
+}
+
+header.topo p {
+    margin-top: 0.5rem;
+    font-size: 0.9rem;
+}
+
+.btn-logout {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    background: var(--dark-color);
+    color: #fff;
+    border: none;
+    padding: 0.4rem 0.8rem;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background 0.3s, transform 0.3s;
+}
+
+.btn-logout:hover {
+    transform: scale(1.05);
+    background-color: #0e2a4d;
+}
+
+.theme-btn {
+    position: fixed;
+    top: 1rem;
+    right: 4rem;
+    background: none;
+    border: none;
+    color: var(--primary-color);
+    font-size: 1.5rem;
+    cursor: pointer;
+    z-index: 1000;
+}
+
+body.dark .theme-btn {
+    color: var(--secondary-color);
 }
 
 /* Botão principal */
 form .btn-primary {
-    background-color: #007BFF;
+    background-color: var(--primary-color);
     color: #fff;
     padding: 12px 20px;
     font-size: 1rem;
     border: none;
-    border-radius: 6px;
+    border-radius: var(--border-radius);
     cursor: pointer;
-    transition: background-color 0.3s ease;
+    transition: background-color var(--transition-speed);
+}
+
+body.dark form .btn-primary {
+    background-color: var(--secondary-color);
+    color: #000;
+}
+
+form {
+    background-color: #fff;
+    border-radius: var(--border-radius);
+}
+
+body.dark form {
+    background-color: #1f1f1f;
+    color: #fff;
+}
+
+#formulario form {
+    max-width: 500px;
+    margin: auto;
+    padding: 1.5rem;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+}
+
+.estado-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(60px, 1fr));
+    gap: 0.25rem;
+}
+
+select.form-select {
+    appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath fill='none' stroke='%2300843d' stroke-linecap='round' stroke-width='2' d='M2 5l6 6 6-6'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 0.75rem center;
+    background-size: 12px;
+    padding-right: 2rem;
+}
+
+body.dark select.form-select,
+body.dark input.form-control {
+    background-color: #333;
+    color: #fff;
+    border-color: #555;
 }
 
 form .btn-primary:hover {
-    background-color: #0056b3;
+    background-color: var(--dark-color);
 }
 
-/* Rodapé */
-footer {
-    font-size: 0.9rem;
-    background-color: #333;
-    color: #fff;
-    text-align: center;
-    padding: 20px;
-    border-top: 3px solid #0056b3;
+body.dark form .btn-primary:hover {
+    background-color: #0e2a4d;
 }
 
 /* Cards para os gráficos */
