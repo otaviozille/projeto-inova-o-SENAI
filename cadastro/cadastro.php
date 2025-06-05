@@ -15,10 +15,10 @@
    <title>Cadastro Petrobras</title>
    <link rel="stylesheet" href="cadastro.css">
    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
-   <link rel="shortcut icon" href="https://example.com/logo-petrobras.ico" type="image/x-icon">
+   <link rel="icon" href="../imgs/fav.icon.png" type="image/x-icon">
  </head>
 
- <body>
+ <body> 
    <!-- Botão de alternância de tema -->
    <button id="darkModeToggle" class="theme-toggle" aria-label="Alternar tema">☀️</button>
 
